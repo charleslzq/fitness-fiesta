@@ -20,6 +20,6 @@ export class AppService {
     const { messages, errors } = decoder.read();
 
     console.log(errors);
-    console.log(messages);
+    await this.eventService.save('fit-file-parsed', messages);
   }
 }

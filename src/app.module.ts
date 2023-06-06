@@ -11,7 +11,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    MongooseModule.forRoot('mongodb://localhost/local'),
+    MongooseModule.forRoot('mongodb://localhost/fitness'),
     EventModule,
   ],
   controllers: [AppController],

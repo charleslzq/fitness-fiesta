@@ -11,8 +11,8 @@ export class Event {
   @Prop({ type: String, required: true, index: true, lowercase: true })
   type: string;
 
-  @Prop({ type: Map<String, any> })
-  data: Map<string, any>;
+  @Prop({ type: {} })
+  data: any;
 
   @Prop({ type: Date })
   readonly createdAt: Date;
