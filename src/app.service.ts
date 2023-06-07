@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { EventService } from './event/event.service';
+import { Injectable, Logger } from '@nestjs/common';
+import { CommandBus, EventsHandler, IEventHandler } from '@nestjs/cqrs';
+import { Event } from './event/event.schema';
+import { SaveEventCommand } from './event/event.command';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly eventService: EventService) {}
+  constructor(private readonly commandBus: CommandBus) {}
   getHello(): string {
     return 'Hello World!';
   }
@@ -20,6 +22,17 @@ export class AppService {
     const { messages, errors } = decoder.read();
 
     console.log(errors);
-    await this.eventService.save('fit-file-parsed', messages);
+    await this.commandBus.execute(
+      new SaveEventCommand('fit-file-parsed', null, messages),
+    );
+  }
+}
+
+@EventsHandler(Event)
+export class GlobalEventHandler implements IEventHandler<Event> {
+  private readonly logger = new Logger(GlobalEventHandler.name);
+
+  handle(event: Event): any {
+    this.logger.log(event);
   }
 }
