@@ -1,11 +1,6 @@
-import { readFileSync } from 'fs';
-import * as yaml from 'js-yaml';
-import { join } from 'path';
+import * as process from 'process';
 
-const YAML_CONFIG_FILENAME = 'config.yaml';
-
-export default () => {
-  return yaml.load(
-    readFileSync(join(__dirname, YAML_CONFIG_FILENAME), 'utf8'),
-  ) as Record<string, any>;
-};
+export default () => ({
+  port: parseInt(process.env.PORT, 10) || 7080,
+  mongo: process.env.MONGO_CONNECT_STR,
+});

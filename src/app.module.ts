@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
+import {ConfigModule, ConfigService} from '@nestjs/config';
 import configuration from './config/configuration';
 import { EventModule } from './event/event.module';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -10,8 +10,15 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     ConfigModule.forRoot({
       load: [configuration],
+      isGlobal: true,
     }),
-    MongooseModule.forRoot('mongodb://localhost/fitness'),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('mongo')
+      })
+    }),
     EventModule,
   ],
   controllers: [AppController],
