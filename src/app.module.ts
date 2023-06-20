@@ -8,6 +8,8 @@ import {MongooseModule} from '@nestjs/mongoose';
 import {CqrsModule} from '@nestjs/cqrs';
 import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloDriver} from "@nestjs/apollo";
+import {AuthModule} from './auth/auth.module';
+import {UsersModule} from './users/users.module';
 
 @Module({
   imports: [
@@ -34,6 +36,8 @@ import {ApolloDriver} from "@nestjs/apollo";
     }),
     CqrsModule,
     EventModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, GlobalEventHandler],

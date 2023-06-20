@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
+import {NestFactory} from '@nestjs/core';
+import {AppModule} from './app.module';
+import {ConfigService} from '@nestjs/config';
 import helmet from "helmet";
 
 async function bootstrap() {
@@ -9,4 +9,5 @@ async function bootstrap() {
   await app.listen(configService.get<number>('port'));
   await app.use(helmet());
 }
+
 bootstrap();

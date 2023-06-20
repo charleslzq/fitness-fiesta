@@ -1,11 +1,13 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { CommandBus, EventsHandler, IEventHandler } from '@nestjs/cqrs';
-import { Event } from './event/event.schema';
-import { SaveEventCommand } from './event/event.command';
+import {Injectable, Logger} from '@nestjs/common';
+import {CommandBus, EventsHandler, IEventHandler} from '@nestjs/cqrs';
+import {Event} from './event/event.schema';
+import {SaveEventCommand} from './event/event.command';
 
 @Injectable()
 export class AppService {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(private readonly commandBus: CommandBus) {
+  }
+
   getHello(): string {
     return 'Hello World!';
   }
@@ -19,11 +21,11 @@ export class AppService {
     console.log('isFIT (instance method): ' + decoder.isFIT());
     console.log('checkIntegrity: ' + decoder.checkIntegrity());
 
-    const { messages, errors } = decoder.read();
+    const {messages, errors} = decoder.read();
 
     console.log(errors);
     await this.commandBus.execute(
-      new SaveEventCommand('fit-file-parsed', null, messages),
+        new SaveEventCommand('fit-file-parsed', null, messages),
     );
   }
 }
