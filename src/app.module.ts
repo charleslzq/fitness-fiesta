@@ -10,7 +10,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver } from '@nestjs/apollo';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import {ObjectIdScalar} from "./helper/scalars";
+import { ObjectIdScalar } from './helper/scalars';
 
 @Module({
   imports: [
@@ -33,9 +33,6 @@ import {ObjectIdScalar} from "./helper/scalars";
         playground: config.get<string>('env') === 'dev',
         autoSchemaFile: true,
         sortSchema: true,
-        resolvers: {
-          MongoObjectId: ObjectIdScalar,
-        }
       }),
     }),
     CqrsModule,
@@ -44,6 +41,6 @@ import {ObjectIdScalar} from "./helper/scalars";
     UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService, GlobalEventHandler],
+  providers: [AppService, GlobalEventHandler, ObjectIdScalar],
 })
 export class AppModule {}

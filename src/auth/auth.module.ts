@@ -9,11 +9,13 @@ import {
 } from './auth.entity';
 import { UsersModule } from '../users/users.module';
 import { AuthResolver } from './auth.resolver';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   providers: [AuthService, AuthResolver],
   imports: [
     UsersModule,
+    JwtModule,
     MongooseModule.forFeature([
       {
         name: Authentication.name,

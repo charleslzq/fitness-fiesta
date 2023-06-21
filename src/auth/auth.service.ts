@@ -34,9 +34,6 @@ export class AuthService {
     if (emailExists) {
       throw new BadRequestException('Email exists');
     }
-    if (request.passwordConfirm !== request.password) {
-      throw new BadRequestException('Password not matched');
-    }
 
     const [user, hashedPassword] = await Promise.all([
       this.userService.create(request.username),

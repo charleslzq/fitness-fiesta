@@ -1,9 +1,9 @@
-import {Scalar} from "@nestjs/graphql";
-import {Types} from "mongoose";
-import {ASTNode, Kind} from "graphql/language";
+import {CustomScalar, Scalar} from '@nestjs/graphql';
+import { Types } from 'mongoose';
+import { ASTNode, Kind } from 'graphql/language';
 
 @Scalar('MongoObjectId')
-export class ObjectIdScalar {
+export class ObjectIdScalar implements CustomScalar<string, Types.ObjectId> {
   description = 'Mongo object id scalar type';
 
   parseValue(value: string) {

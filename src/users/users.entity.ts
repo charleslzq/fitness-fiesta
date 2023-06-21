@@ -1,26 +1,27 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
-import {Field, ObjectType} from '@nestjs/graphql';
-import {ObjectIdScalar} from "../helper/scalars";
+import { Field, ObjectType } from '@nestjs/graphql';
+import { ObjectIdScalar } from '../helper/scalars';
+import { GraphQLISODateTime } from '@nestjs/graphql/dist/scalars/iso-date.scalar';
 
 @ObjectType()
 @Schema({
   timestamps: true,
 })
 export class User {
-  @Field(type => ObjectIdScalar, {nullable: false})
+  @Field(() => ObjectIdScalar, { nullable: false })
   @Prop({ type: Types.ObjectId, default: () => new mongoose.Types.ObjectId() })
   _id: mongoose.Types.ObjectId;
 
-  @Field({nullable: false})
+  @Field({ nullable: false })
   @Prop({ type: String, required: true, index: true })
   username: string;
 
-  @Field({nullable: false})
+  @Field(() => GraphQLISODateTime, { nullable: false })
   @Prop({ type: Date })
   readonly createdAt: Date;
 
-  @Field({nullable: true})
+  @Field(() => GraphQLISODateTime, { nullable: true })
   @Prop({ type: Date })
   readonly updatedAt: Date;
 }

@@ -13,5 +13,6 @@ import { User, UserSchema } from './users.entity';
       },
     ]),
   ],
+  exports: [UserService],
 })
 export class UsersModule {}
