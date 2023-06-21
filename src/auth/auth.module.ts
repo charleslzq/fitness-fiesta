@@ -7,10 +7,12 @@ import {
   PasswordAuthentication,
   PasswordAuthenticationSchema,
 } from './auth.entity';
+import { UsersModule } from '../users/users.module';
 
 @Module({
   providers: [AuthService],
   imports: [
+    UsersModule,
     MongooseModule.forFeature([
       {
         name: Authentication.name,

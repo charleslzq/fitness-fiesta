@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Types } from 'mongoose';
+import { User } from '../users/users.entity';
 
 @Schema()
 export class PasswordAuthentication {
   _id: mongoose.Types.ObjectId;
   type: string;
-  user_id: mongoose.Types.ObjectId;
+  user: User;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
@@ -27,8 +28,8 @@ export class Authentication {
   @Prop({ type: String, required: true, enum: [PasswordAuthentication.name] })
   type: string;
 
-  @Prop({ type: Types.ObjectId, required: true })
-  user_id: mongoose.Types.ObjectId;
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  user: User;
 
   @Prop({ type: Date })
   readonly createdAt: Date;
