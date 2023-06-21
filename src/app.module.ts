@@ -1,15 +1,15 @@
-import {Module} from '@nestjs/common';
-import {AppController} from './app.controller';
-import {AppService, GlobalEventHandler} from './app.service';
-import {ConfigModule, ConfigService} from '@nestjs/config';
+import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService, GlobalEventHandler } from './app.service';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
-import {EventModule} from './event/event.module';
-import {MongooseModule} from '@nestjs/mongoose';
-import {CqrsModule} from '@nestjs/cqrs';
-import {GraphQLModule} from "@nestjs/graphql";
-import {ApolloDriver} from "@nestjs/apollo";
-import {AuthModule} from './auth/auth.module';
-import {UsersModule} from './users/users.module';
+import { EventModule } from './event/event.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { CqrsModule } from '@nestjs/cqrs';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -32,7 +32,7 @@ import {UsersModule} from './users/users.module';
         playground: config.get<string>('env') === 'dev',
         autoSchemaFile: true,
         sortSchema: true,
-      })
+      }),
     }),
     CqrsModule,
     EventModule,
@@ -42,5 +42,4 @@ import {UsersModule} from './users/users.module';
   controllers: [AppController],
   providers: [AppService, GlobalEventHandler],
 })
-export class AppModule {
-}
+export class AppModule {}

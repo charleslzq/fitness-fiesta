@@ -1,17 +1,17 @@
-import {Event, EventRoot} from './event.schema';
-import {InjectModel} from '@nestjs/mongoose';
-import mongoose, {Model} from 'mongoose';
-import {CommandHandler, EventPublisher, ICommandHandler} from '@nestjs/cqrs';
-import {SaveEventCommand} from './event.command';
+import { Event, EventRoot } from './event.schema';
+import { InjectModel } from '@nestjs/mongoose';
+import mongoose, { Model } from 'mongoose';
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { SaveEventCommand } from './event.command';
 
 @CommandHandler(SaveEventCommand)
 export class SaveEventCommandHandler
-    implements ICommandHandler<SaveEventCommand> {
+  implements ICommandHandler<SaveEventCommand>
+{
   constructor(
-      @InjectModel(Event.name) private readonly eventModel: Model<Event>,
-      private readonly publisher: EventPublisher,
-  ) {
-  }
+    @InjectModel(Event.name) private readonly eventModel: Model<Event>,
+    private readonly publisher: EventPublisher,
+  ) {}
 
   async getEvent(command: SaveEventCommand): Promise<Event> {
     if (command._id) {

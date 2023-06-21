@@ -1,27 +1,27 @@
-import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import mongoose, {Types} from 'mongoose';
-import {AggregateRoot} from '@nestjs/cqrs';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { Types } from 'mongoose';
+import { AggregateRoot } from '@nestjs/cqrs';
 
 @Schema({
   timestamps: true,
 })
 export class Event {
-  @Prop({type: Types.ObjectId, default: () => new mongoose.Types.ObjectId()})
+  @Prop({ type: Types.ObjectId, default: () => new mongoose.Types.ObjectId() })
   _id: mongoose.Types.ObjectId;
 
-  @Prop({type: String, required: true, index: true, lowercase: true})
+  @Prop({ type: String, required: true, index: true, lowercase: true })
   type: string;
 
-  @Prop({type: {}})
+  @Prop({ type: {} })
   meta: any;
 
-  @Prop({type: {}})
+  @Prop({ type: {} })
   data: any;
 
-  @Prop({type: Date})
+  @Prop({ type: Date })
   readonly createdAt: Date;
 
-  @Prop({type: Date})
+  @Prop({ type: Date })
   readonly updatedAt: Date;
 }
 
