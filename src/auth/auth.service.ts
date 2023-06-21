@@ -49,9 +49,11 @@ export class AuthService {
   }
 
   async loginWithEmail(request: LoginWithEmailRequest): Promise<LoginResponse> {
-    const auth = await this.passwordAuthModel.findOne({
-      email: request.email,
-    });
+    const auth = await this.passwordAuthModel
+      .findOne({
+        email: request.email,
+      })
+      .populate('user');
     if (auth === null) {
       throw new BadRequestException("User doesn't exist");
     }
@@ -66,7 +68,10 @@ export class AuthService {
   private createLoginResponseForUser(user: User): LoginResponse {
     return {
       user: user,
-      token: this.jwtService.sign(user),
+      token: this.jwtService.sign({
+        sub: user._id,
+        username: user.username,
+      }),
     };
   }
 
