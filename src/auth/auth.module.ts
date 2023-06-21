@@ -8,9 +8,10 @@ import {
   PasswordAuthenticationSchema,
 } from './auth.entity';
 import { UsersModule } from '../users/users.module';
+import { AuthResolver } from './auth.resolver';
 
 @Module({
-  providers: [AuthService],
+  providers: [AuthService, AuthResolver],
   imports: [
     UsersModule,
     MongooseModule.forFeature([
