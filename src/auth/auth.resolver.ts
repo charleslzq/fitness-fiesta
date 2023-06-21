@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
-import {EmailRequest} from "./auth.dto";
+import { EmailRequest } from './auth.dto';
 
 @Resolver()
 export class AuthResolver {

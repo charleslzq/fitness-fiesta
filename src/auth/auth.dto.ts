@@ -1,6 +1,6 @@
 import { User } from '../users/users.entity';
 import { IsEmail, IsString, MinLength } from 'class-validator';
-import {ArgsType, Field, ObjectType} from '@nestjs/graphql';
+import { ArgsType, Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class LoginResponse {

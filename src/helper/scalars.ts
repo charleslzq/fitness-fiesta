@@ -1,4 +1,4 @@
-import {CustomScalar, Scalar} from '@nestjs/graphql';
+import { CustomScalar, Scalar } from '@nestjs/graphql';
 import { Types } from 'mongoose';
 import { ASTNode, Kind } from 'graphql/language';
 
